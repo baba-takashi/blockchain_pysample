@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Wallet</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script>
+        $(function () {
+            $.ajax({
+                url: '/wallet',
+                type: 'POST',
+                success: function(response) {
+                    $('#public_key').val(response['public_key']);
+                    $('#private_key').val(response['private_key']);
+                    $('#blockchain_address').val(response['blockchain_address']);
+                    console.info(response);
+                },
+                error: function(error){
+                    console.error(error);
+                }
+            })
+        })
+
+    </script>
+</head>
+<body>
+    <div>
+        <h1>Wallet</h1>
+        <p>残高</p>
+        <div id="wallet_amount">0</div>
+        <button id="reload_wallet">Wallet再読込</div>
+
+        <p>公開鍵　Public Key</p>
+        <textarea id="public_key" rows="2" cols="64"></textarea>
+        <p>秘密鍵　Private Key</p>
+        <textarea id="private_key" rows="1" cols="64"></textarea>
+        <p>Blockchain Address</p>
+        <textarea id="blockchain_address" rows="1" cols="68"></textarea>
+    </div>
+
+    <div>
+        <h1>送金</h1>
+        <div>
+            送金先Address: <input id="recipient_blockchain_address" size="100" type="text"><br>
+            送金額:  <input id="send_amount" type="text"><br>
+            <button id="send_money_button">送信</button>
+        </div>
+    </div>
+</body>
+</html>
